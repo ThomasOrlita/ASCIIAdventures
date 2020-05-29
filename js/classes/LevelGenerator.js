@@ -10,7 +10,7 @@ class LevelGenerator {
     let xStep = 0.1; // smaller=smoother from left to right
 
     function getBlock(x, y) {
-      if (x < 0 || y < 0 || x >= GAME.worldWidth || y >= GAME.worldHeight) return ' ';
+      if (x < 0 || y < 0 || x >= GAME.worldWidth || y >= GAME.worldHeight) return GAME.types.air;
 
       return levelRows[y][x]
     }
@@ -23,34 +23,33 @@ class LevelGenerator {
       let value = noise.simplex2(x * xStep, lastNoiseY);
       let diff = value - previousValue;
 
-      //console.log(diff);
-      let nextBlock = '_';
+      let nextBlock = GAME.types.solidTop;
 
       if (diff < -diffThreshold) {
         // climbing down
         lastY++;
         lastNoiseY += yStep;
-        nextBlock = 'l';
+        nextBlock = GAME.types.wallBackward;
 
-        if (getBlock(x - offset - 1, previousY) === '/') {
-          levelRows[previousY][x - offset - 1] = '_';
+        if (getBlock(x - offset - 1, previousY) === GAME.types.wallForward) {
+          levelRows[previousY][x - offset - 1] = GAME.types.solidTop;
         }
       } else if (diff >= -diffThreshold && diff <= diffThreshold) {
         // going straight
-        if (getBlock(x - offset - 1, previousY) === '/') {
-          levelRows[previousY][x - offset - 1] = '_';
+        if (getBlock(x - offset - 1, previousY) === GAME.types.wallForward) {
+          levelRows[previousY][x - offset - 1] = GAME.types.solidTop;
         }
       } else {
         // climbing up
         lastY--;
         lastNoiseY -= yStep;
-        nextBlock = '/';
+        nextBlock = GAME.types.wallForward;
 
-        if (getBlock(x - offset - 1, previousY) === 'l') {
+        if (getBlock(x - offset - 1, previousY) === GAME.types.wallBackward) {
           levelRows[previousY][x - offset - 1] = ' ';
-          levelRows[previousY - 1][x - offset - 1] = '_';
+          levelRows[previousY - 1][x - offset - 1] = GAME.types.solidTop;
         }
-        if (getBlock(x - offset - 1, previousY) === '_') {
+        if (getBlock(x - offset - 1, previousY) === GAME.types.solidTop) {
           lastY += 1;
         }
       }
@@ -63,7 +62,7 @@ class LevelGenerator {
 
     }
 
-    levelRows[1][1] = 'o';
+    levelRows[1][1] = GAME.types.player;
 
     let levelString = '';
     for (let y = 0; y < levelRows.length; ++y) {
