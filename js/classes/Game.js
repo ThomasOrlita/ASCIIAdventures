@@ -89,7 +89,7 @@ class Game {
         const typeName = getKeyByValue(GAME.types, blockValueOriginal);
 
         let blockValue = GAME.typesAlt[typeName] ? GAME.typesAlt[typeName] : blockValueOriginal;
-        levelRows += blockValue;
+        levelRows += blockValueOriginal;
 
         let color = GAME.colors[typeName] || GAME.colors.default;
         let xPx = GAME.bleedSize + (x * GAME.widthSize);
