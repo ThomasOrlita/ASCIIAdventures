@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>ASCII Adventures Game</title>
+    <meta name="viewport" content="width=device-width, maximum-scale=1.0, user-scalable=0">
+    <link href="style.css" rel="stylesheet">
+    <meta property="og:image" content="https://cdn.img.onl/asciiadventures/preview.jpg">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="1392">
+    <meta property="og:image:height" content="919">
+</head>
+
+<body>
+<div id="font_preload">
+    <span id="font300">o</span>
+    <span id="font400">o</span>
+    <span id="font600">o</span>
+    <span id="font700">o</span>
+</div>
+
+<button id="exit_preview_button">&lt; Exit preview</button>
+<button id="edit_in_level_editor_button">Edit in Level Editor</button>
+
+<div id="controls_extra" class="controls">
+    <button id="shoot" class="control-button" data-key="r">⤐</button>
+</div>
+
+<div class="controls">
+    <button id="top_left" class="control-button" data-key="ArrowUpLeft">↖</button>
+    <button id="top" class="control-button" data-key="ArrowUp">↑</button>
+    <button id="top_right" class="control-button" data-key="ArrowUpRight">↗</button>
+    <button id="left" class="control-button" data-key="ArrowLeft">←</button>
+    <button id="bottom" class="control-button" data-key="ArrowDown">↧</button>
+    <button id="right" class="control-button" data-key="ArrowRight">→</button>
+</div>
+
+<div id="level_editor">
+    <iframe id="level_editor_preview_iframe"></iframe>
+    <div id="level_editor_heading">
+        <label for="level_editor_textarea">
+            Create your own level:
+        </label>
+    </div>
+    <div id="level_editor_textarea_wrapper">
+        <textarea id="level_editor_textarea" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-gramm="false"></textarea>
+        <div id="level_editor_instructions">
+            <section>
+                <div class="title">Reference</div>
+                <div class="content">
+                    <ul id="level_editor_instructions_types">
+
+                    </ul>
+                </div>
+            </section>
+            <section>
+                <div class="title">Info</div>
+                <div class="content">
+                    <div>
+                        <p>The world is 64 characters wide and 32 characters high.</p>
+                        <p>Every level has to contain one player (<span style="color: rgb(0, 184, 255);">o</span>) and a 'next level' flag (<span style="color: rgb(202, 172, 0);">🏁</span>).</p>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <details>
+                    <summary class="title">More tools</summary>
+                    <div class="content">
+                        <div>
+                            <p>
+                                <button id="toggle_insert_mode_button"></button>
+                            </p>
+                        </div>
+                        <div>
+                            <p>
+                                <button id="generate_random_terrain_button">Generate random terrain</button>
+                            </p>
+                        </div>
+                        <div>
+                            <p>
+                                <button id="load_level_from_template">Load level from template</button>
+                            </p>
+                        </div>
+                    </div>
+                </details>
+
+
+            </section>
+        </div>
+    </div>
+    <div id="level_editor_panel">
+        <div>
+            <label for="level_editor_title">Level title: </label><input type="text" id="level_editor_title" maxlength="64">
+        </div>
+        <div>
+            <label for="level_editor_url">Share this level: </label><input type="url" id="level_editor_url">
+        </div>
+        <div>
+
+            <button id="level_editor_preview_button">Preview level</button>
+        </div>
+
+    </div>
+</div>
+
+<div id="landscape_message">This game is best played in landscape mode.</div>
+
+<div id="backdrop"></div>
+<canvas id="canvas"></canvas>
+
+<!-- Perlin noise -->
+<script src="js/libs/perlin.js"></script>
+
+<!-- GAME object -->
+<script src="js/data/constants.js"></script>
+
+<!-- Game classes -->
+<script src="js/classes/Block.js"></script>
+<script src="js/classes/Enemy.js"></script>
+<script src="js/classes/EnemyFollowing.js"></script>
+<script src="js/classes/Game.js"></script>
+<script src="js/classes/Menu.js"></script>
+<script src="js/classes/Button.js"></script>
+<script src="js/classes/Level.js"></script>
+<script src="js/classes/LevelGenerator.js"></script>
+<script src="js/classes/LevelPathfinder.js"></script>
+<script src="js/data/levelTemplates.js"></script>
+<script src="js/classes/GameController.js"></script>
+
+
+<!-- Pathfinding -->
+
+<script type="text/javascript" src="js/libs/pathfinding-platformer/scripts/libs/class.js"></script>
+<script type="text/javascript" src="js/libs/pathfinding-platformer/scripts/models/step.js"></script>
+<script type="text/javascript" src="js/libs/pathfinding-platformer/scripts/models/tile.js"></script>
+<script type="text/javascript" src="js/libs/pathfinding-platformer/scripts/controllers/map-collision.js"></script>
+<script type="text/javascript" src="js/libs/pathfinding-platformer/scripts/controllers/pathfinder.js"></script>
+<script type="text/javascript" src="js/libs/pathfinding-platformer/scripts/controllers/jump.js"></script>
+<script type="text/javascript" src="js/libs/pathfinding-platformer/scripts/controllers/helper.js"></script>
+<script type="text/javascript" src="js/libs/pathfinding-platformer/scripts/controllers/map-clearance.js"></script>
+<script type="text/javascript" src="js/libs/pathfinding-platformer/scripts/controllers/map-movement.js"></script>
+
+
+<script src="js/main.js"></script>
+<script src="js/levelEditor.js"></script>
+
+</body>
+
+</html>

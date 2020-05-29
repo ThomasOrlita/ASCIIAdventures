@@ -1,0 +1,396 @@
+@font-face {
+    font-family: 'BPdots Squares Bold';
+    src: url('BPdotsSquares-Bold.woff2') format('woff2');
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: 'BPdots Squares Bold', monospace;
+    overflow: hidden;
+    user-select: none;
+    margin: 0;
+    background-color: #0b0b20;
+    background-image: url('https://cdn.img.onl/asciiadventures/backgrounds/bg.png');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: top;
+    backdrop-filter: blur(4px);
+    color: #fff;
+}
+
+#backdrop {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(0.75);
+    box-shadow: 0 0 30px 170px #00000061;
+    background: #00000061;
+}
+
+#backdrop.full {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+#canvas {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+#font_preload {
+    position: absolute;
+    left: -10000px
+}
+
+#font_preload #font300 {
+    font-weight: 300;
+}
+
+#font_preload #font400 {
+    font-weight: 400;
+
+}
+
+#font_preload #font600 {
+    font-weight: 600;
+}
+
+#font_preload #font700 {
+    font-weight: 700;
+}
+
+.controls {
+    --button-width: 40px;
+    --button-height: 40px;
+    position: fixed;
+    display: flex;
+    bottom: 0;
+    right: 0;
+    z-index: 100;
+    transform: scale(1.5) translate(-40px, -20px);
+    opacity: 0.3;
+}
+
+.controls * {
+    width: var(--button-width);
+    height: var(--button-height);
+
+    -webkit-appearance: none;
+    border: 2px solid #ffffff40;
+    border-radius: 14px;
+}
+
+.controls #top {
+    position: absolute;
+    bottom: var(--button-width);
+    right: var(--button-width);
+
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.controls #top_left {
+    position: absolute;
+    bottom: var(--button-width);
+    left: 0;
+    border-bottom-right-radius: 0;
+}
+
+.controls #top_right {
+    position: absolute;
+    bottom: var(--button-width);
+    right: 0;
+    border-bottom-left-radius: 0;
+}
+
+.controls #left {
+    border-top-right-radius: 0;
+}
+
+.controls #bottom {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.controls #right {
+    border-top-left-radius: 0;
+}
+
+
+#controls_extra {
+    left: 0;
+    transform: scale(1.5) translate(20px, -20px);
+    transform-origin: bottom left;
+    flex-direction: column;
+}
+
+.controls #shoot {
+    position: absolute;
+    bottom: var(--button-width);
+}
+
+.controls {
+    display: none;
+}
+
+@media only screen and (max-width: 640px) {
+    .controls {
+        display: flex;
+    }
+}
+
+@media (hover: none) {
+    .controls {
+        display: flex;
+    }
+}
+
+#landscape_message {
+    display: none;
+}
+
+@media only screen and (max-width: 640px) and (orientation: portrait) {
+    #landscape_message {
+        display: block;
+        position: absolute;
+        bottom: 0;
+        font-size: 0.8em;
+        margin: 0.6em;
+        right: 0;
+        left: 0;
+        text-align: center;
+        color: #ccc;
+    }
+}
+
+@media only screen and (max-height: 450px) {
+    #canvas {
+        top: 65%;
+    }
+}
+
+#level_editor {
+    display: none;
+
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    padding: 10vmin 10%;
+    box-sizing: border-box;
+    z-index: 10;
+    color: #fff;
+    flex-direction: column;
+    text-align: center;
+    overflow-y: auto;
+}
+
+#level_editor.show {
+    display: flex;
+}
+
+#level_editor.preview {
+    overflow-y: hidden;
+}
+
+#level_editor_textarea_wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+}
+
+#level_editor_textarea {
+    border: 2px solid #ffffffb0;
+    background: transparent;
+    color: #fff;
+    resize: none;
+    font-family: 'BPdots Squares Bold', monospace;
+
+    font-size: 1.25em;
+    max-width: 64em;
+    min-width: 40em;
+    height: 40em;
+    flex: 5;
+    flex-basis: 32em;
+}
+
+#level_editor_instructions {
+    flex: 1;
+    text-align: left;
+    flex-basis: 8em;
+    max-width: 32em;
+    margin-left: 2em;
+}
+
+#level_editor_instructions_types {
+    list-style: none;
+    min-width: 16em;
+    line-height: 1.25;
+    user-select: text;
+    padding: 0;
+}
+
+#level_editor_instructions section {
+    margin-bottom: 4em;
+    padding: 0 2em;
+}
+
+#level_editor_instructions .title {
+    text-align: center;
+}
+
+#level_editor_instructions .content {
+}
+
+#level_editor_instructions div {
+    text-align: left;
+}
+
+
+#level_editor_preview_iframe {
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    border: none;
+}
+
+#level_editor_preview_iframe.show {
+    display: block;
+}
+
+button, input[type="text"], input[type="url"] {
+    background: transparent;
+    color: #fff;
+    padding: 1em;
+    border-color: #fff;
+    border-width: 2px;
+    border-style: dashed;
+    font-family: 'BPdots Squares Bold', monospace;
+    font-size: 1em;
+}
+
+button:hover, input[type="text"]:hover, input[type="url"]:hover {
+    color: #caac00;
+    border-color: #caac00;
+}
+
+#exit_preview_button, #edit_in_level_editor_button {
+    display: none;
+    position: absolute;
+    z-index: 15;
+    margin: 1.5em;
+    opacity: 0.5;
+}
+
+#edit_in_level_editor_button {
+    bottom: 0;
+    right: 0;
+}
+
+#exit_preview_button.show, #edit_in_level_editor_button.show {
+    display: block;
+}
+
+#exit_preview_button:hover, #edit_in_level_editor_button:hover {
+    opacity: 1;
+}
+
+#level_editor_panel {
+    display: flex;
+    justify-content: space-between;
+}
+
+#level_editor_panel > div {
+    flex-direction: column;
+    display: flex;
+    align-self: flex-end;
+}
+
+#level_editor_panel label {
+    padding-bottom: 1em;
+    display: inline-flex;
+}
+
+#level_editor_title, #level_editor_url {
+    min-width: 20em;
+}
+
+#level_editor_heading {
+
+    font-size: 1.5em;
+    text-align: left;
+    margin-bottom: 0.5em;
+}
+
+@media only screen and (max-width: 1360px) {
+    #level_editor_textarea_wrapper {
+        flex-direction: column;
+    }
+
+    #level_editor_instructions {
+        margin-left: 0;
+        margin-top: 4em;
+        flex-direction: row;
+        display: flex;
+        max-width: none;
+    }
+
+    #level_editor_panel {
+        flex-direction: column;
+    }
+
+    #level_editor_panel > div {
+        justify-content: flex-start !important;
+        margin-bottom: 2em;
+        align-self: auto;
+    }
+
+    #level_editor_panel > div label {
+        margin-right: 1em;
+    }
+
+    #level_editor_panel > div button {
+        width: 16em;
+        margin: auto;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    #level_editor {
+        padding: 4vw;
+    }
+
+    #level_editor_instructions {
+        flex-direction: column;
+    }
+
+    #level_editor_textarea {
+        min-width: initial;
+    }
+}
+
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+    background-color: #b7b7b70f;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #9a9a9f;
+    border-radius: 0;
+}
+
+::-webkit-scrollbar-corner {
+    background-color: #b7b7b70f;
+}
