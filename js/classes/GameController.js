@@ -106,6 +106,7 @@ class GameController {
         new Button(canvasContext, 7, 3, 'Play again', (GAME.height / 2) + 25, 100, () => {
           GAME.selectedView = 'game';
           this.game.lives = GAME.startingLives;
+          this.game.level.setPlayerPosition(this.game.level.spawnPosition);
         }),
       ];
 
@@ -184,7 +185,6 @@ class GameController {
         ;
 
         rfs.call(el);
-        console.log('clicked ' + btn.dataset.key);
         if (btn.dataset.key === 'ArrowUpLeft') {
           GAME.pressedKeys.ArrowUp = true;
           GAME.pressedKeys.ArrowLeft = true;
@@ -196,8 +196,6 @@ class GameController {
         }
       };
       btn.ontouchend = () => {
-        console.log('released ' + btn.dataset.key);
-
         setTimeout(() => {
           if (btn.dataset.key === 'ArrowUpLeft') {
             GAME.pressedKeys.ArrowUp = false;
