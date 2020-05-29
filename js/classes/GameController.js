@@ -254,6 +254,8 @@ class GameController {
         canvasContext.clearRect(0, 0, GAME.width, GAME.height);
         document.getElementById('level_editor').classList.add('show');
         document.getElementById('backdrop').classList.add('full');
+        document.getElementById('controls_main').classList.add('hide');
+        document.getElementById('controls_extra').classList.add('hide');
 
         break;
 
@@ -366,6 +368,8 @@ class GameController {
     if (GAME.selectedViewPrevious === 'levelEditor' && GAME.selectedView !== 'levelEditor') {
       document.getElementById('level_editor').classList.remove('show');
       document.getElementById('backdrop').classList.remove('full');
+      document.getElementById('controls_main').classList.remove('hide');
+      document.getElementById('controls_extra').classList.remove('hide');
     }
 
 

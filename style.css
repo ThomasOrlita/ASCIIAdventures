@@ -65,6 +65,10 @@ body {
     font-weight: 700;
 }
 
+.controls.hide {
+    display: none;
+}
+
 .controls {
     --button-width: 40px;
     --button-height: 40px;
