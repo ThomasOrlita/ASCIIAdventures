@@ -23,6 +23,7 @@ class Game {
 
   setLevel(level) {
     this.level = level;
+    this.level.setPlayerPosition(level.spawnPosition);
   }
 
   draw(update = true) {

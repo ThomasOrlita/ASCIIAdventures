@@ -179,7 +179,6 @@ const GAME = {
   widthSize: 10,
   heightSize: 15,
   startingLives: 5,
-  currentLevel: 0,
   frame: 0,
   customLevelTemplatePrefix: 'ASCIIAdventures1.0',
   isPreview: false,
