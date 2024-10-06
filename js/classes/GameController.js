@@ -57,7 +57,7 @@ class GameController {
         }),
       ];
     this.menu.mainMenuImage = new Image();
-    this.menu.mainMenuImage.src = 'https://cdn.img.onl/asciiadventures/logo_big.png';
+    this.menu.mainMenuImage.src = 'https://static.app.quest/assets/asciiadventures/logo_big.png';
 
 
     this.levelSelectScreenMenu = new Menu(canvasContext);
